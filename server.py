@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, render_template, url_for, redirect
 import matplotlib.pyplot as plt
+import process
 
 app = Flask(__name__)
 
@@ -12,10 +13,10 @@ def fileFrontPage():
 def handleFileUpload():
     if 'photo' in request.files:
         photo = request.files['photo']
-        if photo.filename != '':
-        	pass            
-            #photo.save(os.path.join('C:/Users/Prashant/desktop', photo.filename))
-    print(type(photo))
+        if photo.filename != '':    
+            photo.save(os.path.join('C:/Users/Prashant/desktop/try/images/', photo.filename))
+    process.processImage(photo.filename)
+    print('server.py redirecting ...')
     return redirect(url_for('fileFrontPage'))
 
 if __name__ == '__main__':
