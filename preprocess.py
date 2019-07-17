@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import cv2 
 imagePath = "C:/Users/prashant/Desktop/dataset/training/naevus"
-savePath = "C:/Users/prashant/Desktop/prepro/saved"
+savePath = "C:/Users/prashant/Desktop/third/minorProject/images"
 
 '''------------ LOADING IMAGES FROM FILES -------------'''
 def loadImage(path):
@@ -29,15 +29,15 @@ def display_two(imgA, imgB, title1="Original", title2="Edited"):
 
 """ ------------------ PROCESSING THE IMAGE ----------------"""
 def processing(data):
-	img_bgr = cv2.imread(data, cv2.IMREAD_UNCHANGED)
+	img_bgr = cv2.imread(data, cv2.IMREAD_UNCHANGED)#data is path hai
 	img = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB) #changing bgr to rgb
 	print('Original size:', img.shape)
 	
 	
 
 	'''----------RESIZING THE IMAGE---------------'''
-	height = 600
-	width = 600
+	height = 500
+	width = 500
 	dim = (height, width)
 	resized = cv2.resize(img, dim, interpolation=cv2.INTER_LINEAR)
 	
@@ -51,7 +51,6 @@ def processing(data):
 	blurred = cv2.GaussianBlur(resized, (5,5), 0)
 	#printing the blurred image
 	display_two(resized, blurred, 'Resized', 'Blurred')
-
 
 
 	'''-------------segmentation---------------------'''
@@ -79,6 +78,7 @@ def processing(data):
 	#displaying segmented background
 	display_two(tList[0], sure_bg, 'first seg', 'later seg' )
 	'''
+	return gray
 
 def main():
 	data = loadImage(imagePath)

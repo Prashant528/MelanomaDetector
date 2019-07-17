@@ -14,7 +14,8 @@ def handleFileUpload():
     if 'photo' in request.files:
         photo = request.files['photo']
         if photo.filename != '':    
-            photo.save(os.path.join('C:/Users/Prashant/desktop/try/images/', photo.filename))
+            photo.save(os.path.join('C:/Users/prashant/Desktop/third/minorProject/images/', photo.filename))
+            
     mainProcess.processImage(photo.filename)
     print('server.py redirecting ...')
     return redirect(url_for('fileFrontPage'))
