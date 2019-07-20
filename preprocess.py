@@ -33,31 +33,30 @@ def processing(data):
 	img = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB) #changing bgr to rgb
 	print('Original size:', img.shape)
 	
+	'''--------grayscale conversion---------------'''
+	gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 	
 
 	'''----------RESIZING THE IMAGE---------------'''
 	height = 500
 	width = 500
 	dim = (height, width)
-	resized = cv2.resize(img, dim, interpolation=cv2.INTER_LINEAR)
+	resized = cv2.resize(gray, dim, interpolation=cv2.INTER_LINEAR)
 	
 	#printing the resized image
-	display_two(img, resized, 'Original', 'Resized')
+	display_two(img, gray, 'Original', 'Grayed')
 
-
-	
 
 	'''---------removing noise by gaussian blur---------'''
-	blurred = cv2.GaussianBlur(resized, (5,5), 0)
+	blurred = cv2.medianBlur(resized, 5)
 	#printing the blurred image
-	display_two(resized, blurred, 'Resized', 'Blurred')
+	display_two(resized, blurred, 'Resized', 'Median Filtered')
 
 
 	'''-------------segmentation---------------------'''
-	gray = cv2.cvtColor(blurred, cv2.COLOR_RGB2GRAY)
-	ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+	ret, thresh = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 	# printing the grayed and thresholded image
-	display_two(gray, thresh, 'Grayed', 'Thresholded')
+	display_two(blurred, thresh, 'Filtered', 'Thresholded')
 
 	'''YESLE CHAI HAWA KAM GAREKO JASTO LAIRAXA MALAI
 	# Further noise removal
@@ -78,7 +77,7 @@ def processing(data):
 	#displaying segmented background
 	display_two(tList[0], sure_bg, 'first seg', 'later seg' )
 	'''
-	return gray
+	return blurred
 
 def main():
 	data = loadImage(imagePath)

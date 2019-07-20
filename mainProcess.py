@@ -25,19 +25,19 @@ def processImage(imgFileName):
 
 	path = os.path.join('C:/Users/prashant/Desktop/third/minorProject/images/', imgFileName)
 	processed = preprocess.processing(path) #this sends image to next module for preprocessing.
-
+	print(path)
 	print('\n--------------PREDICTIONS------------------\n')
-	# img = image.load_img('C:/Users/prashant/Desktop/dataset2/training/non/grayed_non0.jpg', target_size =(500,500,1))
-	# img_processed = preprocess.processing(img);
 	x = image.img_to_array(processed)
 	x = np.expand_dims(x, axis=0)
-	print("yaha samma kam vairaxa ..............")
 	with graph.as_default():
 		set_session(sess)
 		prediction = model.predict(x, batch_size=None)
-	print("tyaha samma ???")
-	print(prediction)
-	print('/n')
+
+	print("Risk factor from image = ",1-prediction, type(prediction))
+	print('\n')
+	value = prediction[0][0]
+	print(type(value))
+	return value
 
 if(__name__ == '__main__'):
 	processImage()

@@ -16,9 +16,9 @@ def handleFileUpload():
         if photo.filename != '':    
             photo.save(os.path.join('C:/Users/prashant/Desktop/third/minorProject/images/', photo.filename))
             
-    mainProcess.processImage(photo.filename)
-    print('server.py redirecting ...')
-    return redirect(url_for('fileFrontPage'))
+    predic = mainProcess.processImage(photo.filename)
+    # return redirect(url_for('fileFrontPage'))
+    return render_template("result.html", result = predic)
 
 if __name__ == '__main__':
-	app.run(host = '0.0.0.0') 
+	app.run(host = '0.0.0.0', debug = True) 
