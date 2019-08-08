@@ -33,7 +33,7 @@ def processImage(imgFileName):
 		set_session(sess)
 		prediction = model.predict(x, batch_size=None)
 
-	print("Risk factor from image = ",1-prediction, type(prediction))
+	print("Risk factor from image = ",prediction, type(prediction))
 	print('\n')
 	value = prediction[0][0]
 	print(type(value))

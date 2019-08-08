@@ -34,23 +34,23 @@ def processing(data):
 	print('Original size:', img.shape)
 	
 	'''--------grayscale conversion---------------'''
-	gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+	# gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 	
 
 	'''----------RESIZING THE IMAGE---------------'''
 	height = 500
 	width = 500
 	dim = (height, width)
-	resized = cv2.resize(gray, dim, interpolation=cv2.INTER_LINEAR)
+	resized = cv2.resize(img, dim, interpolation=cv2.INTER_LINEAR)
 	
 	#printing the resized image
-	display_two(img, gray, 'Original', 'Grayed')
+	# display_two(img, gray, 'Original', 'Grayed')
 
 
 	'''---------removing noise by gaussian blur---------'''
 	blurred = cv2.medianBlur(resized, 5)
 	#printing the blurred image
-	display_two(resized, blurred, 'Resized', 'Median Filtered')
+	display_two(resized, blurred, 'Original', 'Median Filtered')
 
 
 	'''-------------segmentation---------------------'''
