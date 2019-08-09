@@ -16,7 +16,7 @@ global graph
 sess = tensorflow.Session()
 graph = tensorflow.get_default_graph()
 set_session(sess)
-model = load_model('final_model.h5')
+model = load_model('newModelgray.h5')
 # model.summary()
 
 

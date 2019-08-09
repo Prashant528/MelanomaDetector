@@ -32,14 +32,14 @@ def processing(data):
 	img_bgr = cv2.imread(data, cv2.IMREAD_UNCHANGED)#data is path hai
 	img = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB) #changing bgr to rgb
 	print('Original size:', img.shape)
-	
+	# display_one(img)
 	'''--------grayscale conversion---------------'''
 	# gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 	
 
 	'''----------RESIZING THE IMAGE---------------'''
-	height = 500
-	width = 500
+	width = 600
+	height = 450
 	dim = (height, width)
 	resized = cv2.resize(img, dim, interpolation=cv2.INTER_LINEAR)
 	
@@ -50,13 +50,7 @@ def processing(data):
 	'''---------removing noise by gaussian blur---------'''
 	blurred = cv2.medianBlur(resized, 5)
 	#printing the blurred image
-	display_two(resized, blurred, 'Original', 'Median Filtered')
-
-
-	'''-------------segmentation---------------------'''
-	ret, thresh = cv2.threshold(blurred, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-	# printing the grayed and thresholded image
-	display_two(blurred, thresh, 'Filtered', 'Thresholded')
+	# display_two(resized, blurred, 'Resized', 'Median Filtered')
 
 	'''YESLE CHAI HAWA KAM GAREKO JASTO LAIRAXA MALAI
 	# Further noise removal
